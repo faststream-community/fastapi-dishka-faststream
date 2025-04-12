@@ -12,14 +12,14 @@ from book_club.infrastructure.models import Base
 config = context.config
 
 config.set_main_option(
-    'sqlalchemy.url',
-    'postgresql+psycopg://{user}:{password}@{host}:{port}/{db}'.format(
-        user=os.getenv('POSTGRES_USER'),
-        password=os.getenv('POSTGRES_PASSWORD'),
-        host=os.getenv('POSTGRES_HOST'),
-        port=os.getenv('POSTGRES_PORT'),
-        db=os.getenv('POSTGRES_DB'),
-    )
+    "sqlalchemy.url",
+    "postgresql+psycopg://{user}:{password}@{host}:{port}/{db}".format(
+        user=os.getenv("POSTGRES_USER"),
+        password=os.getenv("POSTGRES_PASSWORD"),
+        host=os.getenv("POSTGRES_HOST"),
+        port=os.getenv("POSTGRES_PORT"),
+        db=os.getenv("POSTGRES_DB"),
+    ),
 )
 
 # Interpret the config file for Python logging.
@@ -78,9 +78,7 @@ def run_migrations_online() -> None:
     )
 
     with connectable.connect() as connection:
-        context.configure(
-            connection=connection, target_metadata=target_metadata
-        )
+        context.configure(connection=connection, target_metadata=target_metadata)
 
         with context.begin_transaction():
             context.run_migrations()

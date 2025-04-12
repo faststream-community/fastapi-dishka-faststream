@@ -18,13 +18,15 @@ class HTTPBookController(Controller):
     @route(http_method=HttpMethod.GET, path="/{book_id:uuid}")
     @inject
     async def get_book(
-            self,
-            book_id: Annotated[UUID, Body(description="Book ID", title="Book ID")],
-            interactor: Depends[GetBookInteractor],
+        self,
+        book_id: Annotated[UUID, Body(description="Book ID", title="Book ID")],
+        interactor: Depends[GetBookInteractor],
     ) -> BookSchema:
         book_dm = await interactor(uuid=str(book_id))
         if not book_dm:
-            raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="Book not found")
+            raise HTTPException(
+                status_code=HTTPStatus.NOT_FOUND, detail="Book not found"
+            )
         return BookSchema(
             title=book_dm.title,
             pages=book_dm.pages,

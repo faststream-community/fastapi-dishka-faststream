@@ -7,7 +7,7 @@ from litestar import Litestar
 from book_club.config import Config
 from book_club.controllers.amqp import AMQPBookController
 from book_club.controllers.http import HTTPBookController
-from book_club.infrastructure.broker import new_broker
+from book_club.infrastructure.resources.broker import new_broker
 from book_club.ioc import AppProvider
 
 config = Config()

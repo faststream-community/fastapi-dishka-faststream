@@ -29,7 +29,9 @@ class BookGateway(
         )
 
     async def save(self, book: BookDM) -> None:
-        query = text("INSERT INTO books (uuid, title, pages, is_read) VALUES (:uuid, :title, :pages, :is_read)")
+        query = text(
+            "INSERT INTO books (uuid, title, pages, is_read) VALUES (:uuid, :title, :pages, :is_read)"
+        )
         await self._session.execute(
             statement=query,
             params={

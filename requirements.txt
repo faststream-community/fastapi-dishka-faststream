@@ -1,9 +1,14 @@
 pydantic==2.7.0
-faststream[rabbit]==0.5.11
-dishka==1.2.0
-litestar==2.8.3
+faststream[rabbit]==0.5.35
+dishka==1.4.2
+litestar==2.15.1
 uvicorn==0.28.0
-SQLAlchemy==2.0.28
+SQLAlchemy[asyncio]==2.0.28
 alembic==1.13.1
-psycopg==3.1.18
+psycopg[binary, pool]==3.1.18
+
+# Dev dependencies
 watchfiles==0.22.0
+pytest==8.3.5
+pytest-asyncio==0.25.3
+Faker==37.0.0

@@ -5,8 +5,8 @@ from book_club.domain import entities
 
 class GetBookInteractor:
     def __init__(
-            self,
-            book_gateway: interfaces.BookReader,
+        self,
+        book_gateway: interfaces.BookReader,
     ) -> None:
         self._book_gateway = book_gateway
 
@@ -16,10 +16,10 @@ class GetBookInteractor:
 
 class NewBookInteractor:
     def __init__(
-            self,
-            db_session: interfaces.DBSession,
-            book_gateway: interfaces.BookSaver,
-            uuid_generator: interfaces.UUIDGenerator,
+        self,
+        db_session: interfaces.DBSession,
+        book_gateway: interfaces.BookSaver,
+        uuid_generator: interfaces.UUIDGenerator,
     ) -> None:
         self._db_session = db_session
         self._book_gateway = book_gateway
@@ -28,10 +28,7 @@ class NewBookInteractor:
     async def __call__(self, dto: NewBookDTO) -> str:
         uuid = str(self._uuid_generator())
         book = entities.BookDM(
-            uuid=uuid,
-            title=dto.title,
-            pages=dto.pages,
-            is_read=dto.is_read
+            uuid=uuid, title=dto.title, pages=dto.pages, is_read=dto.is_read
         )
 
         await self._book_gateway.save(book)
