@@ -21,9 +21,7 @@ def get_book_interactor() -> GetBookInteractor:
 @pytest.mark.parametrize("uuid", [str(uuid4()), str(uuid4())])
 async def test_get_book(get_book_interactor: GetBookInteractor, uuid: str) -> None:
     result = await get_book_interactor(uuid=uuid)
-    get_book_interactor._book_gateway.read_by_uuid.assert_awaited_once_with(
-        uuid=uuid
-    )
+    get_book_interactor._book_gateway.read_by_uuid.assert_awaited_once_with(uuid=uuid)
     assert result == get_book_interactor._book_gateway.read_by_uuid.return_value
 
 
@@ -35,7 +33,9 @@ def new_book_interactor(faker: Faker) -> NewBookInteractor:
     return NewBookInteractor(db_session, book_gateway, uuid_generator)
 
 
-async def test_new_book_interactor(new_book_interactor: NewBookInteractor, faker: Faker) -> None:
+async def test_new_book_interactor(
+    new_book_interactor: NewBookInteractor, faker: Faker
+) -> None:
     dto = NewBookDTO(
         title=faker.pystr(),
         pages=faker.pyint(),
