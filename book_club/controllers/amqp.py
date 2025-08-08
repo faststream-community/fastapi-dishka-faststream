@@ -11,10 +11,6 @@ AMQPBookController = RabbitRouter()
 @AMQPBookController.subscriber("create_book")
 @AMQPBookController.publisher("book_statuses")
 async def handle(data: BookSchema, interactor: Depends[NewBookInteractor]) -> str:
-    dto = NewBookDTO(
-        title=data.title,
-        pages=data.pages,
-        is_read=data.is_read
-    )
+    dto = NewBookDTO(title=data.title, pages=data.pages, is_read=data.is_read)
     uuid = await interactor(dto)
     return uuid

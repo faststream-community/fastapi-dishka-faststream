@@ -1,5 +1,6 @@
 version: "3.8"
 name: book-club
+
 services:
   rabbitmq:
     image: rabbitmq:3.13-management
