@@ -25,7 +25,7 @@ async def broker() -> RabbitBroker:
 async def amqp_app(broker: RabbitBroker, container: AsyncContainer) -> FastStream:
     app = FastStream(broker)
     faststream_integration.setup_dishka(container, app, auto_inject=True)
-    return FastStream(broker)
+    return app
 
 
 @pytest.fixture
