@@ -1,6 +1,6 @@
 # Litestar-Dishka-FastStream
 
-[![License - MIT](https://img.shields.io/badge/license-MIT-202235.svg?logo=python&labelColor=202235&color=edb641&logoColor=edb641)](https://spdx.org/licenses/) 
+[![License - MIT](https://img.shields.io/badge/license-MIT-202235.svg?logo=python&labelColor=202235&color=edb641&logoColor=edb641)](https://spdx.org/licenses/)
 [![Litestar Project](https://img.shields.io/badge/Litestar%20Org-%E2%AD%90%20Litestar-202235.svg?logo=python&labelColor=202235&color=edb641&logoColor=edb641)](https://github.com/litestar-org/litestar)
 [![FastStream](https://camo.githubusercontent.com/4bbf0095f52083ac1b693fdab68466f859b674aeef4bcb5c92fb0c087812dfc0/68747470733a2f2f696d672e736869656c64732e696f2f656e64706f696e743f75726c3d68747470732533412532462532467261772e67697468756275736572636f6e74656e742e636f6d25324661673261692532466661737473747265616d2532466d61696e253246646f6373253246646f6373253246617373657473253246696d67253246736869656c642e6a736f6e)](https://faststream.airt.ai/)
 [![Dishka](https://img.shields.io/badge/Dishka-1.4.2+-green)](https://github.com/reagento/dishka)
@@ -8,7 +8,7 @@
 This project is an implementation of "Clean architecture" in combining:
 - [Litestar](https://github.com/litestar-org/litestar)
 - [Dishka](https://github.com/reagento/dishka)
-- [FastStream](https://github.com/reagento/dishka)
+- [FastStream](https://github.com/ag2ai/faststream)
 
 ## Architecture Overview
 
@@ -26,7 +26,7 @@ Set up virtual environment and install dependencies:
 ```shell
 python3 -m venv venv  # Edit .env if needed
 source venv/bin/activate
-pip install -r requirements.txt 
+pip install -r requirements.txt
 ```
 
 Configure environment and start services:
@@ -63,7 +63,7 @@ uvicorn --factory book_club.main:get_litestar_app --reload
 faststream run --factory book_club.main:get_faststream_app --reload
 ```
 
-### Usage Examples 
+### Usage Examples
 
 ```shell
 // Create a Book via AMQP
