@@ -7,8 +7,6 @@ from book_club.domain.entities import BookDM
 from book_club.infrastructure.gateways import BookGateway
 from book_club.infrastructure.models import Book
 
-pytestmark = pytest.mark.asyncio
-
 
 @pytest.fixture
 async def book_gateway(session: AsyncSession) -> BookGateway:

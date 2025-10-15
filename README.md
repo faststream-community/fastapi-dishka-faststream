@@ -2,7 +2,7 @@
 
 [![License - MIT](https://img.shields.io/badge/license-MIT-202235.svg?logo=python&labelColor=202235&color=edb641&logoColor=edb641)](https://spdx.org/licenses/)
 [![Litestar Project](https://img.shields.io/badge/Litestar%20Org-%E2%AD%90%20Litestar-202235.svg?logo=python&labelColor=202235&color=edb641&logoColor=edb641)](https://github.com/litestar-org/litestar)
-[![FastStream](https://camo.githubusercontent.com/4bbf0095f52083ac1b693fdab68466f859b674aeef4bcb5c92fb0c087812dfc0/68747470733a2f2f696d672e736869656c64732e696f2f656e64706f696e743f75726c3d68747470732533412532462532467261772e67697468756275736572636f6e74656e742e636f6d25324661673261692532466661737473747265616d2532466d61696e253246646f6373253246646f6373253246617373657473253246696d67253246736869656c642e6a736f6e)](https://faststream.airt.ai/)
+[![FastStream](https://camo.githubusercontent.com/4bbf0095f52083ac1b693fdab68466f859b674aeef4bcb5c92fb0c087812dfc0/68747470733a2f2f696d672e736869656c64732e696f2f656e64706f696e743f75726c3d68747470732533412532462532467261772e67697468756275736572636f6e74656e742e636f6d25324661673261692532466661737473747265616d2532466d61696e253246646f6373253246646f6373253246617373657473253246696d67253246736869656c642e6a736f6e)](https://faststream.ag2.ai/latest/)
 [![Dishka](https://img.shields.io/badge/Dishka-1.4.2+-green)](https://github.com/reagento/dishka)
 
 This project is an implementation of "Clean architecture" in combining:
@@ -17,7 +17,7 @@ This project is an implementation of "Clean architecture" in combining:
 ## Quick Start
 
 ### Prerequisites
-- Python 3.8+
+- Python 3.10+
 - Docker & Docker Compose
 
 ### Installation

@@ -1,14 +1,15 @@
-pydantic==2.7.0
-faststream[rabbit]==0.5.35
-dishka==1.4.2
-litestar==2.15.1
-uvicorn==0.28.0
-SQLAlchemy[asyncio]==2.0.28
-alembic==1.13.1
-psycopg[binary, pool]==3.1.18
+pydantic==2.12.2
+faststream[cli,rabbit]==0.6.1
+dishka==1.7.2
+dishka-faststream==0.5.0
+litestar==2.18.0
+uvicorn==0.37.0
+SQLAlchemy[asyncio]==2.0.44
+alembic==1.17.0
+psycopg[binary, pool]==3.2.10
 
 # Dev dependencies
-watchfiles==0.22.0
-pytest==8.3.5
-pytest-asyncio==0.25.3
-Faker==37.0.0
+watchfiles==1.1.1
+pytest==8.4.2
+pytest-asyncio==1.2.0
+Faker==37.11.0
