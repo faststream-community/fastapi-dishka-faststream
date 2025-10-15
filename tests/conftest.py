@@ -14,8 +14,6 @@ from book_club.config import PostgresConfig
 from book_club.infrastructure.models import Base
 from book_club.ioc import AppProvider
 
-pytestmark = pytest.mark.asyncio
-
 
 @pytest.fixture(scope="session")
 def postgres_config() -> PostgresConfig:

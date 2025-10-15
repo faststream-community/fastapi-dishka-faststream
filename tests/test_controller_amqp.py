@@ -34,7 +34,6 @@ async def amqp_client(amqp_app: FastStream) -> AsyncIterator[RabbitBroker]:
         yield br
 
 
-@pytest.mark.asyncio
 async def test_save_book(
     amqp_client: RabbitBroker, session: AsyncSession, faker: Faker
 ) -> None:

@@ -9,8 +9,6 @@ from book_club.application.dto import NewBookDTO
 from book_club.application.interactors import GetBookInteractor, NewBookInteractor
 from book_club.domain import entities
 
-pytestmark = pytest.mark.asyncio
-
 
 @pytest.fixture
 def get_book_interactor() -> GetBookInteractor:
