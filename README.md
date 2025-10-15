@@ -17,7 +17,7 @@ This project is an implementation of "Clean architecture" in combining:
 ## Quick Start
 
 ### Prerequisites
-- Python 3.8+
+- Python 3.10+
 - Docker & Docker Compose
 
 ### Installation
@@ -86,5 +86,5 @@ docker exec -it book-club-postgres psql -U $POSTGRES_USER -d $POSTGRES_DB -c "CR
 
 Run tests:
 ```shell
-TEST_DB=test_db pytest tests/ --asyncio-mode=auto
+TEST_DB=test_db pytest
 ```
