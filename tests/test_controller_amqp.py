@@ -1,8 +1,8 @@
 from collections.abc import AsyncIterator
 
+import dishka_faststream
 import pytest
 from dishka import AsyncContainer
-from dishka.integrations import faststream as faststream_integration
 from faker import Faker
 from faststream import FastStream
 from faststream.rabbit import RabbitBroker
@@ -24,7 +24,7 @@ async def broker() -> RabbitBroker:
 @pytest.fixture
 async def amqp_app(broker: RabbitBroker, container: AsyncContainer) -> FastStream:
     app = FastStream(broker)
-    faststream_integration.setup_dishka(container, app, auto_inject=True)
+    dishka_faststream.setup_dishka(container, app, auto_inject=True)
     return app
 
 
