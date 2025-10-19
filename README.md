@@ -13,6 +13,7 @@ This project is an implementation of "Clean architecture" in combining:
 ## Architecture Overview
 
 - [Пишем универсальный прототип бэкенд-приложения](https://habr.com/ru/companies/pt/articles/820171/)
+- [Практическое тестирование приложений](https://habr.com/ru/articles/958014/)
 
 ## Quick Start
 
