@@ -1,8 +1,7 @@
 from typing import Annotated
 from uuid import UUID
 
-from dishka.integrations.fastapi import FromDishka
-from dishka.integrations.fastapi import inject
+from dishka.integrations.fastapi import FromDishka, inject
 from fastapi import APIRouter, HTTPException, Path, status
 
 from book_club.application.interactors import GetBookInteractor
