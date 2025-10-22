@@ -1,12 +1,12 @@
 import dishka_faststream
 from dishka import make_async_container
-from dishka.integrations import litestar as litestar_integration
+from dishka.integrations.fastapi import setup_dishka
+from fastapi import FastAPI
 from faststream import FastStream
-from litestar import Litestar
 
 from book_club.config import Config
+from book_club.controllers.http import book_router
 from book_club.controllers.amqp import AMQPBookController
-from book_club.controllers.http import HTTPBookController
 from book_club.infrastructure.resources.broker import new_broker
 from book_club.ioc import AppProvider
 
@@ -22,19 +22,20 @@ def get_faststream_app() -> FastStream:
     return faststream_app
 
 
-def get_litestar_app() -> Litestar:
-    litestar_app = Litestar(
-        route_handlers=[HTTPBookController],
-    )
-    litestar_integration.setup_dishka(container, litestar_app)
-    return litestar_app
+def get_fastapi_app() -> FastAPI:
+    fastapi_app = FastAPI(title="Book club")
+    fastapi_app.include_router(book_router)
+
+    setup_dishka(container, fastapi_app)
+
+    return fastapi_app
 
 
 def get_app():
     faststream_app = get_faststream_app()
-    litestar_app = get_litestar_app()
+    fastapi_app = get_fastapi_app()
 
-    litestar_app.on_startup.append(faststream_app.broker.start)
-    litestar_app.on_shutdown.append(faststream_app.broker.close)
+    fastapi_app.add_event_handler("startup", faststream_app.broker.start)
+    fastapi_app.add_event_handler("shutdown", faststream_app.broker.close)
 
-    return litestar_app
+    return fastapi_app
