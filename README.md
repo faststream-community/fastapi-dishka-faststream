@@ -11,7 +11,7 @@ This project is an implementation of "Clean architecture" in combining:
 - [FastStream](https://github.czom/ag2ai/faststream)
 
 > ⚡ **Why FastAPI?**\
-The original template was built with Litestar, but over time interest in it has faded and it's rarely used in real projects. The project has been migrated to FastAPI — the de facto standard for building HTTP APIs in Python.
+The original example application was built using the Litestar framework. However, as the framework evolved, it took a rather specific development direction, so we decided to rewrite the materials using FastAPI. As of today, it is the most optimal framework choice for working with HTTP.
 
 ## Architecture Overview
 
