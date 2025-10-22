@@ -2,7 +2,7 @@ pydantic==2.12.2
 faststream[cli,rabbit]==0.6.1
 dishka==1.7.2
 dishka-faststream==0.5.0
-litestar==2.18.0
+fastapi==0.119.1
 uvicorn==0.37.0
 SQLAlchemy[asyncio]==2.0.44
 alembic==1.17.0
@@ -13,3 +13,4 @@ watchfiles==1.1.1
 pytest==8.4.2
 pytest-asyncio==1.2.0
 Faker==37.11.0
+httpx==0.28.1

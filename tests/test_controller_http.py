@@ -2,35 +2,37 @@ from collections.abc import AsyncIterator
 
 import pytest
 from dishka import AsyncContainer
-from dishka.integrations import litestar as litestar_integration
 from faker import Faker
-from litestar import Litestar
-from litestar.testing import AsyncTestClient
+from fastapi import FastAPI
+from dishka.integrations.fastapi import setup_dishka
+from httpx import AsyncClient, ASGITransport
 from sqlalchemy import insert
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from book_club.controllers.http import HTTPBookController
 from book_club.infrastructure.models import Book
+from book_club.controllers.http import book_router
 
 
 @pytest.fixture
-async def http_app(container: AsyncContainer) -> Litestar:
-    app = Litestar(
-        route_handlers=[HTTPBookController],
-    )
-    litestar_integration.setup_dishka(container, app)
+async def http_app(container: AsyncContainer) -> FastAPI:
+    app = FastAPI()
+    app.include_router(router=book_router)
+    setup_dishka(container, app)
     return app
 
 
 @pytest.fixture
-async def http_client(http_app: Litestar) -> AsyncIterator[AsyncTestClient]:
-    async with AsyncTestClient(app=http_app) as client:
+async def http_client(http_app: FastAPI) -> AsyncIterator[AsyncClient]:
+    async with AsyncClient(
+        transport=ASGITransport(app=http_app),
+        base_url="http://",
+    ) as client:
         yield client
 
 
 async def test_get_book(
     session: AsyncSession,
-    http_client: AsyncTestClient,
+    http_client: AsyncClient,
     faker: Faker,
 ) -> None:
     uuid = faker.uuid4()
