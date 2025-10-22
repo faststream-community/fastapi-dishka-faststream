@@ -1,18 +1,17 @@
 from typing import Annotated
 from uuid import UUID
 
-from dishka.integrations.fastapi import FromDishka, inject
+from dishka.integrations.fastapi import DishkaRoute, FromDishka
 from fastapi import APIRouter, HTTPException, Path, status
 
 from book_club.application.interactors import GetBookInteractor
 from book_club.controllers.schemas import BookSchema
 
 
-book_router = APIRouter(prefix="/book")
+book_router = APIRouter(prefix="/book", route_class=DishkaRoute)
 
 
 @book_router.get("/{book_id:uuid}")
-@inject
 async def get_book(
     book_id: Annotated[UUID, Path(description="Book ID", title="Book ID")],
     interactor: FromDishka[GetBookInteractor],
