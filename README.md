@@ -10,8 +10,8 @@ This project is an implementation of "Clean architecture" in combining:
 - [Dishka](https://github.com/reagento/dishka)
 - [FastStream](https://github.czom/ag2ai/faststream)
 
-> ⚡ Почему FastAPI?\
-Исходный шаблон был на Litestar, но со временем интерес к нему угас и он встречается редко. Мы мигрировали на FastAPI — де-факто стандарт для HTTP API на Python.
+> ⚡ **Why FastAPI?**\
+The original template was built with Litestar, but over time interest in it has faded and it's rarely used in real projects. The project has been migrated to FastAPI — the de facto standard for building HTTP APIs in Python.
 
 ## Architecture Overview
 
