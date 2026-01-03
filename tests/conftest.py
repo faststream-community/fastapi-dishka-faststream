@@ -1,17 +1,15 @@
 import os
 from typing import Any, AsyncGenerator
-from unittest.mock import AsyncMock
-from unittest.mock import MagicMock
+from unittest.mock import AsyncMock, MagicMock
 
 import pytest
-from dishka import AnyOf, Provider, Scope, provide
-from dishka import AsyncContainer, make_async_container
-from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
+from dishka import AnyOf, AsyncContainer, Provider, Scope, make_async_container, provide
+from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
 from book_club.application import interfaces
-from book_club.config import Config
-from book_club.config import PostgresConfig
+from book_club.config import Config, PostgresConfig
 from book_club.infrastructure.models import Base
+from book_club.ioc import AppProvider
 
 
 @pytest.fixture(scope="session")
@@ -71,4 +69,6 @@ def mock_provider(session: AsyncSession) -> Provider:
 
 @pytest.fixture
 def container(mock_provider: Provider) -> AsyncContainer:
-    return make_async_container(mock_provider, context={Config: MagicMock()})
+    return make_async_container(
+        AppProvider(), mock_provider, context={Config: MagicMock()}
+    )
