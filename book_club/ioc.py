@@ -1,7 +1,7 @@
 from typing import AsyncIterable
 from uuid import uuid4
 
-from dishka import Provider, Scope, provide, AnyOf, from_context
+from dishka import Provider, Scope, provide, AnyOf
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
 
 from book_club.application import interfaces
@@ -12,8 +12,6 @@ from book_club.infrastructure.gateways import BookGateway
 
 
 class AppProvider(Provider):
-    config = from_context(provides=Config, scope=Scope.APP)
-
     @provide(scope=Scope.APP)
     def get_uuid_generator(self) -> interfaces.UUIDGenerator:
         return uuid4

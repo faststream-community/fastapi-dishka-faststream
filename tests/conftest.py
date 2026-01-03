@@ -12,7 +12,6 @@ from book_club.application import interfaces
 from book_club.config import Config
 from book_club.config import PostgresConfig
 from book_club.infrastructure.models import Base
-from book_club.ioc import AppProvider
 
 
 @pytest.fixture(scope="session")
@@ -62,7 +61,7 @@ async def session(
 
 @pytest.fixture
 def mock_provider(session: AsyncSession) -> Provider:
-    class MockProvider(AppProvider):
+    class MockProvider(Provider):
         @provide(scope=Scope.REQUEST)
         async def get_session(self) -> AnyOf[AsyncSession, interfaces.DBSession]:
             return session
