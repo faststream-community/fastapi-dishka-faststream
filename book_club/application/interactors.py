@@ -17,11 +17,11 @@ class GetBookInteractor:
 class NewBookInteractor:
     def __init__(
         self,
-        db_session: interfaces.DBSession,
+        trx_manager: interfaces.TransactionManager,
         book_gateway: interfaces.BookSaver,
         uuid_generator: interfaces.UUIDGenerator,
     ) -> None:
-        self._db_session = db_session
+        self._trx_manager = trx_manager
         self._book_gateway = book_gateway
         self._uuid_generator = uuid_generator
 
@@ -32,5 +32,5 @@ class NewBookInteractor:
         )
 
         await self._book_gateway.save(book)
-        await self._db_session.commit()
+        await self._trx_manager.commit()
         return uuid

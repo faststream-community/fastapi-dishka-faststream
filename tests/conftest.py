@@ -61,7 +61,7 @@ async def session(
 def mock_provider(session: AsyncSession) -> Provider:
     class MockProvider(Provider):
         @provide(scope=Scope.REQUEST)
-        async def get_session(self) -> AnyOf[AsyncSession, interfaces.DBSession]:
+        async def get_session(self) -> AnyOf[AsyncSession, interfaces.TransactionManager]:
             return session
 
     return MockProvider()

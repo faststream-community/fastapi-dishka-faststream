@@ -25,10 +25,10 @@ async def test_get_book(get_book_interactor: GetBookInteractor, uuid: str) -> No
 
 @pytest.fixture
 def new_book_interactor(faker: Faker) -> NewBookInteractor:
-    db_session = create_autospec(interfaces.DBSession)
+    trx_manager = create_autospec(interfaces.TransactionManager)
     book_gateway = create_autospec(interfaces.BookSaver)
     uuid_generator = MagicMock(return_value=faker.uuid4())
-    return NewBookInteractor(db_session, book_gateway, uuid_generator)
+    return NewBookInteractor(trx_manager, book_gateway, uuid_generator)
 
 
 async def test_new_book_interactor(
@@ -49,5 +49,5 @@ async def test_new_book_interactor(
             is_read=dto.is_read,
         )
     )
-    new_book_interactor._db_session.commit.assert_awaited_once()
+    new_book_interactor._trx_manager.commit.assert_awaited_once()
     assert result == uuid

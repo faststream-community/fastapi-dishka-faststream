@@ -26,7 +26,7 @@ class AppProvider(Provider):
     ) -> AsyncIterable[
         AnyOf[
             AsyncSession,
-            interfaces.DBSession,
+            interfaces.TransactionManager,
         ]
     ]:
         async with session_maker() as session:
