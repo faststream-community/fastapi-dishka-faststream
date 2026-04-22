@@ -1,9 +1,9 @@
 import os
-from typing import Any, AsyncGenerator
-from unittest.mock import AsyncMock, MagicMock
+from collections.abc import AsyncGenerator
+from unittest.mock import MagicMock
 
 import pytest
-from dishka import AnyOf, AsyncContainer, Provider, Scope, make_async_container, provide
+from dishka import AsyncContainer, Provider, Scope, make_async_container, provide
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
 from book_club.application import interfaces
@@ -50,9 +50,8 @@ async def session_maker(
 @pytest.fixture
 async def session(
     session_maker: async_sessionmaker[AsyncSession],
-) -> AsyncGenerator[AsyncSession, Any]:
+) -> AsyncGenerator[AsyncSession]:
     async with session_maker() as session:
-        session.commit = AsyncMock()
         yield session
         await session.rollback()
 
@@ -61,8 +60,15 @@ async def session(
 def mock_provider(session: AsyncSession) -> Provider:
     class MockProvider(Provider):
         @provide(scope=Scope.REQUEST)
-        async def get_session(self) -> AnyOf[AsyncSession, interfaces.TransactionManager]:
+        async def get_session(self) -> AsyncSession:
             return session
+
+        @provide(scope=Scope.REQUEST)
+        async def get_transaction_manager(
+            self, db_session: AsyncSession
+        ) -> AsyncGenerator[interfaces.TransactionManager]:
+            async with db_session.begin_nested() as trx:
+                yield trx
 
     return MockProvider()
 
