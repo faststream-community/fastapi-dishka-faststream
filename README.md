@@ -42,13 +42,19 @@ export $(grep -v '^#' .env | xargs)  # This command can be useful in the next st
 
 Initialize database:
 ```shell
+alembic revision --autogenerate -m "First migration"
 alembic upgrade head
 ```
 
 Create RabbitMQ queues:
 ```shell
-docker exec -it book-club-rabbitmq rabbitmqadmin -u $RABBITMQ_USER -p $RABBITMQ_PASS -V / declare queue name=create_book durable=false
-docker exec -it book-club-rabbitmq rabbitmqadmin -u $RABBITMQ_USER -p $RABBITMQ_PASS -V / declare queue name=book_statuses durable=false
+docker exec -it book-club-rabbitmq rabbitmqadmin -u $RABBITMQ_USER -p $RABBITMQ_PASS declare queue --name=create_book --durable=false
+docker exec -it book-club-rabbitmq rabbitmqadmin -u $RABBITMQ_USER -p $RABBITMQ_PASS declare queue --name=book_statuses --durable=false
+```
+
+Check RabbitMQ queues:
+```shell
+docker exec -it book-club-rabbitmq rabbitmqadmin -u $RABBITMQ_USER -p $RABBITMQ_PASS queues list
 ```
 
 ### Run the project
@@ -71,11 +77,10 @@ faststream run --factory book_club.main:get_faststream_app --reload
 
 ```shell
 // Create a Book via AMQP
-docker exec -it book-club-rabbitmq rabbitmqadmin -u $RABBITMQ_USER -p $RABBITMQ_PASS \
-publish exchange=amq.default routing_key=create_book payload='{"title": "The Brothers Karamazov", "pages": 928, "is_read": true}'
+docker exec -it book-club-rabbitmq rabbitmqadmin -u $RABBITMQ_USER -p $RABBITMQ_PASS publish message --routing-key 'create_book' --exchange 'amq.default' --payload '{"title": "The Brothers Karamazov", "pages": 928, "is_read": true}'
 
 // Read uuid of created book
-docker exec -it book-club-rabbitmq rabbitmqadmin -u $RABBITMQ_USER -p $RABBITMQ_PASS get queue=book_statuses count=10
+docker exec -it book-club-rabbitmq rabbitmqadmin -u $RABBITMQ_USER -p $RABBITMQ_PASS get messages --queue 'book_statuses' --count 10
 
 // Get book info by http api
 curl http://localhost:8000/book/{uuid}
