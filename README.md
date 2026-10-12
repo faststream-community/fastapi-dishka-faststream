@@ -15,8 +15,15 @@ The original example application was built using the Litestar framework. However
 
 ## Architecture Overview
 
+Original articles on Habr (Russian):
+
 - [Пишем универсальный прототип бэкенд-приложения](https://habr.com/ru/companies/pt/articles/820171/)
 - [Практическое тестирование приложений](https://habr.com/ru/articles/958014/)
+
+English translations on DEV, published as the [Python Backend Architecture and Testing](https://dev.to/sehat1137/series/45138) series:
+
+- [Clean Architecture in Python with FastAPI, FastStream, and Dishka](https://dev.to/sehat1137/clean-architecture-in-python-with-fastapi-faststream-and-dishka-340k)
+- [Testing a Python Backend: Unit, Integration, and Service Tests](https://dev.to/sehat1137/testing-a-python-backend-unit-integration-and-service-tests-2lak)
 
 ## Quick Start
 
